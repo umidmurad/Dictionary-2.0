@@ -1,41 +1,54 @@
-//
 // Created by Umid Muradli on 2/23/22.
 //
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "sstream"
 #include <vector>
+#include "algorithm"
+
 using namespace std;
 
 int main() {
-        string line;
-        fstream FileReader;
-        vector<string> startingvector;
-        FileReader.open("/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt", ios::in);
-        if (FileReader.is_open()){
-            while (!FileReader.eof()){
-                while(getline(FileReader, line))
-                {
-                    //reads def,
-                    string tokend;
-                    string del = "-=>>";
-                    string dels = "|";
-                    size_t pos = line.find(del);
-                    size_t space = line.find(dels);
-                    tokend = line.substr(pos+5, space);
-                    startingvector.push_back(tokend);
-                }
+    string line;
+    fstream FileReader;
+    vector<string> startingvector;
+    FileReader.open("../Data.CS.SFSU.txt", ios::in);
+    if (FileReader.is_open()) {
+        while (!FileReader.eof()) {
+            while (getline(FileReader, line)) {
+                string word, pos, def, posAndDef;
+                char pipe = '|';
+                char arrow = ' -';
+                
+                word = line.substr(0, line.find('|'));
+                cout << "\n" << word << "-----------------------------" << endl;
+                line.erase(0, line.find('|') + 1);
+                stringstream pipeSep(line);
 
+                size_t defsAmount = count(line.begin(), line.end(), arrow);
+                for (int i = 0; i < defsAmount; i++) {
+                    getline(pipeSep, posAndDef, pipe); // pipe = "|"
+                    //cout << posAndDef << endl; //Example: posAndDef=  noun -=>> Here is one arrow: <IMG> -=>> </IMG>..
+                    line.erase(0, line.find(posAndDef.size() + 1)); // erase until end of posAndDef +1 to delete '|'
+
+                    pos = posAndDef.substr(0, posAndDef.find('-'));
+                    cout << pos << ": ";
+                    def = posAndDef.erase(0, posAndDef.find('-') + 5);
+                    cout << def << endl;
+                }
 
             }
         }
-        else
-        { //if cant open the file
-            cout <<"Error opening the file.";
-        }
-        FileReader.close();
-        for ( int i = 0; i < startingvector.size(); i++)
-        {cout << startingvector[i] <<endl;}
+
+
+    } else { //if cant open the file
+        cout << "Error opening the file.";
+    }
+
+    FileReader.close();
+    //for ( int i = 0; i < startingvector.size(); i++)
+    //{cout << startingvector[i] <<endl;}
 
 //    //this works for getting speech
 //    string token;
@@ -53,4 +66,4 @@ int main() {
 //    tokenw = line.substr(0, pos);
 //    startingvector.push_back(tokenw);
     return 0;
-};
+}
