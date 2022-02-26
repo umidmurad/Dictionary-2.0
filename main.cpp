@@ -15,18 +15,18 @@ int main() {
     vector<string> startingvector;
     FileReader.open("../Data.CS.SFSU.txt", ios::in);
     if (FileReader.is_open()) {
-        while (!FileReader.eof()) {
+        //while (!FileReader.eof()) {
             while (getline(FileReader, line)) {
                 string word, pos, def, posAndDef;
                 char pipe = '|';
                 char arrow = ' -';
-
+                size_t defsAmount = count(line.begin(), line.end(), pipe); //moved here 
                 word = line.substr(0, line.find('|'));
                 cout << "\n" << word << "-----------------------------" << endl;
                 line.erase(0, line.find('|') + 1);
                 stringstream pipeSep(line);
 
-                size_t defsAmount = count(line.begin(), line.end(), arrow);
+                //size_t defsAmount = count(line.begin(), line.end(), arrow); moved this up, and it counts pipe, instead of arrow
                 for (int i = 0; i < defsAmount; i++) {
                     getline(pipeSep, posAndDef, pipe); // pipe = "|"
 
@@ -36,7 +36,7 @@ int main() {
                     cout << def << endl;
                 }
 
-            }
+           // }
         }
 
 
