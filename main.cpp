@@ -20,7 +20,7 @@ int main() {
                 string word, pos, def, posAndDef;
                 char pipe = '|';
                 char arrow = ' -';
-                
+
                 word = line.substr(0, line.find('|'));
                 cout << "\n" << word << "-----------------------------" << endl;
                 line.erase(0, line.find('|') + 1);
@@ -29,10 +29,8 @@ int main() {
                 size_t defsAmount = count(line.begin(), line.end(), arrow);
                 for (int i = 0; i < defsAmount; i++) {
                     getline(pipeSep, posAndDef, pipe); // pipe = "|"
-                    //cout << posAndDef << endl; //Example: posAndDef=  noun -=>> Here is one arrow: <IMG> -=>> </IMG>..
-                    line.erase(0, line.find(posAndDef.size() + 1)); // erase until end of posAndDef +1 to delete '|'
 
-                    pos = posAndDef.substr(0, posAndDef.find('-'));
+                    pos = posAndDef.substr(0, posAndDef.find('-')-1);
                     cout << pos << ": ";
                     def = posAndDef.erase(0, posAndDef.find('-') + 5);
                     cout << def << endl;
