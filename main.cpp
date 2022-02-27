@@ -6,14 +6,13 @@
 #include "sstream"
 #include <vector>
 #include "algorithm"
-#include "Test.h"
-
 using namespace std;
 
 int main() {
+    string reWriterSorter(string);
+    string reWriterInput(string);
     string line;
     fstream FileReader;
-    vector<string> startingvector;
     vector< pair<string, pair<string, string> > > myvec;
     FileReader.open("../Data.CS.SFSU.txt", ios::in);
     if (FileReader.is_open()) {
@@ -23,6 +22,7 @@ int main() {
             char arrow = ' -';
             size_t defsAmount = count(line.begin(), line.end(), pipe); //moved here
             word = line.substr(0, line.find('|'));
+            word = reWriterSorter(word);
             cout << "\n" << word << "-----------------------------" << endl;
             line.erase(0, line.find('|') + 1);
             stringstream pipeSep(line);
@@ -35,6 +35,7 @@ int main() {
                 cout << pos << ": ";
                 def = posAndDef.erase(0, posAndDef.find(arrow) + 5);
                 cout << def << endl;
+                def = reWriterSorter(def);
 
                 myvec.push_back(make_pair(word, make_pair(pos,def)));   // new
             }
@@ -55,15 +56,16 @@ int main() {
 
         cout << "\n\nType something here:   ";
         cin >> input;
+        input = reWriterInput(input);
         cout <<"\n|\n";
         for (int i = 0; i < myvec.size(); i++) {
 
-            //while (input == myvec[i].first) {
+            while (input == myvec[i].first) {
 
                 cout  <<endl << myvec[i].first << " [" << myvec[i].second.first
                      << "]  : " << myvec[i].second.second <<endl ;
-                //i++;
-            //}
+                i++;
+            }
 
         }
         cout <<"\n|\n";
@@ -76,4 +78,14 @@ int main() {
 
 
     return 0;
+}
+string reWriterSorter(string str){
+    str[0] = toupper(str[0]);
+    return str;
+}
+string reWriterInput(string str){
+    for(int i = 0; i < str.size(); i++)
+        str[i] = tolower(str[i]);
+    str[0] = toupper(str[0]);
+    return str;
 }
