@@ -10,8 +10,10 @@ int main() {
     FileLoader(); //loads the data
     //new after this
     string input;
+    int keepcount =1;
     while(input != "!q") {
-        cout << "\n\nType something here:   ";
+        cout << "\n\nSearch [" <<keepcount <<"] : ";
+        keepcount++;
         cin >> input;
         input = reWriterInput(input);
         cout <<"\n|";

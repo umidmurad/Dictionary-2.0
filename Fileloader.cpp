@@ -13,6 +13,7 @@ string reWriterSorter(string);
 string reWriterInput(string);
 vector< pair<string, pair<string, string> > > myvec;
 void FileLoader() {
+    int wordcounter=0, defcounter=0;
     string line, opener ="/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/cmake-build-debug/Data.CS.SFSU.txt";
     fstream FileReader;
     FileReader.open(opener, ios::in);
@@ -28,11 +29,13 @@ void FileLoader() {
         cout <<"! Loading data...\n";
         while (getline(FileReader, line)) {
             string word, pos, def, posAndDef;
+
             char pipe = '|', arrow = ' -';
             size_t defsAmount = count(line.begin(), line.end(), pipe); //counts the "|"
             word = line.substr(0, line.find(pipe));
+            wordcounter++;
             word = reWriterSorter(word);
-            cout << "\n" << word << "-----------------------------" << endl;
+            //cout << "\n" << word << "-----------------------------" << endl;
             line.erase(0, line.find(pipe) + 1);
             stringstream pipeSep(line);
 
@@ -40,9 +43,10 @@ void FileLoader() {
                 getline(pipeSep, posAndDef, pipe); // pipe = "|"
 
                 pos = posAndDef.substr(0, posAndDef.find(arrow) - 1);
-                cout << pos << ": ";
+                //cout << pos << ": ";
                 def = posAndDef.erase(0, posAndDef.find(arrow) + 5);
-                cout << def << endl;
+                //cout << def << endl;
+                defcounter++;
                 def = reWriterSorter(def);
 
                 myvec.push_back(make_pair(word, make_pair(pos, def)));   // new
@@ -52,7 +56,9 @@ void FileLoader() {
         cout <<"! Loading completed...\n";
     }
     FileReader.close();
-
+    cout <<endl << "====== DICTIONARY 340 C++ =====" <<endl;
+    cout << "------ Keywords: " <<wordcounter <<endl;
+    cout << "------ Definitions: " << defcounter <<endl;
 }
 
 string reWriterSorter(string str){
