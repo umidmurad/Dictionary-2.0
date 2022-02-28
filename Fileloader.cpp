@@ -76,6 +76,16 @@ vector<string> inputSep(string input){
         cout << temp << endl;*/
 return optionHolder;
 }
+void caseChooser(string input){
+    vector<string> optionHolder =inputSep(input);
+    switch (optionHolder.size()) {
+        case 1: cout << "Here we will print all defs of word"<< endl; break;
+        case 2: cout << "print lookUp, distinct, reverse" << endl; break;
+        case 3: cout << "distinct, reverse" << endl; break;
+        case 4: cout << "reverse" << endl; break;
+        default: cout << "You have inputted more than 4 options" << endl;
+    }
+}
 string reWriterSorter(string str){
     str[0] = toupper(str[0]);
     return str;

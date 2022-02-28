@@ -16,7 +16,7 @@ int main() {
         keepcount++;
         getline(cin, input);
         input = reWriterInput(input);
-        inputSep(input);
+        caseChooser(input);
         cout <<"\n|";
         for (int i = 0; i < myvec.size(); i++) {
 
