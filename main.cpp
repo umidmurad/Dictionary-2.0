@@ -14,8 +14,9 @@ int main() {
     while(input != "!q") {
         cout << "\n\nSearch [" <<keepcount <<"] : ";
         keepcount++;
-        cin >> input;
+        getline(cin, input);
         input = reWriterInput(input);
+        inputSep(input);
         cout <<"\n|";
         for (int i = 0; i < myvec.size(); i++) {
 

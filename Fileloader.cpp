@@ -60,7 +60,22 @@ void FileLoader() {
     cout << "------ Keywords: " <<wordcounter <<endl;
     cout << "------ Definitions: " << defcounter <<endl;
 }
-
+vector<string> inputSep(string input){
+    input.append(" "); // If I do not add a space, it will not read the last thing inputted
+    vector<string> optionHolder;
+    stringstream line(input);
+    string option;
+    size_t numberOfSpaces = count(input.begin(), input.end(), ' ');
+    for(size_t i = 0; i < numberOfSpaces; i++) {
+        getline(line, option, ' ');
+        if(option == "") // If Extra Space is inputted skip to next word
+            continue;
+        optionHolder.push_back(option);
+    }
+    /*for(string temp : optionHolder)
+        cout << temp << endl;*/
+return optionHolder;
+}
 string reWriterSorter(string str){
     str[0] = toupper(str[0]);
     return str;
