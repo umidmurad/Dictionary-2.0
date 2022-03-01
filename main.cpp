@@ -16,17 +16,9 @@ int main() {
         keepcount++;
         getline(cin, input);
         input = reWriterInput(input);
-        caseChooser(input);
         cout <<"\n|";
-        for (int i = 0; i < myvec.size(); i++) {
-
-            while (input == myvec[i].first) {
-
-                cout  <<endl << myvec[i].first << " [" << myvec[i].second.first
-                     << "]  : " << myvec[i].second.second  ;
-                i++;
-            }
-        }
+        //caseChooser(input);
+        inputSep(input);
         cout <<"\n|";
     }
     return 0;
