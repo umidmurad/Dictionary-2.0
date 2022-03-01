@@ -9,18 +9,18 @@ using namespace std;
 
 int main() {
     FileLoader(); //loads the data
+    filler();
     //new after this
     string input;
     int keepcount =1;
     while(input != "!q") {
-        cout << "\n\nSearch [" <<keepcount <<"] : ";
+        cout << "\nSearch [" <<keepcount <<"] : ";
         keepcount++;
         getline(cin, input);
+        cout << "|"<< endl;
         input = reWriterInput(input);
-        cout <<"\n|";
         //caseChooser(input);
         inputSep(input);
-        cout <<"\n|";
     }
     return 0;
 }
