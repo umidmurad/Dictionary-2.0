@@ -4,6 +4,7 @@
 #include <string>
 #include "algorithm"
 #include "Fileloader.cpp"
+#include "Printer.cpp"
 using namespace std;
 
 int main() {
