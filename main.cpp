@@ -17,7 +17,7 @@ int main() {
         cout << "\nSearch [" <<keepcount <<"] : ";
         keepcount++;
         getline(cin, input);
-        cout << "|"<< endl;
+        //cout << "|"<< endl;
         input = reWriterInput(input);
         //caseChooser(input);
         inputSep(input);

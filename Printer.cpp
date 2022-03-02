@@ -14,18 +14,18 @@ vector<string> reverse4;
 
 void errorChecker(string input, int caseNumber){
     switch (caseNumber) {
-        case 2: cout << "<The entered" << caseNumber << "nd parameter'" << input << " is NOT a part of speech.>" << endl;
+        case 2: cout<< endl << "<The entered" << caseNumber << "nd parameter'" << input << " is NOT a part of speech.>" << endl;
         cout << "<The entered " << caseNumber << "nd parameter '" + input << "' is NOT 'distinct'.>" << endl;
         cout << "<The entered " << caseNumber << "nd parameter '" << input << "' is NOT 'reverse'.>" << endl;
         cout << "<The entered " << caseNumber << "nd parameter '" << input << "' was disregarded.>" << endl;
         cout << "<The " << caseNumber <<"nd parameter should be a part of speech or 'distinct' or 'reverse'.>" << endl << "|" << endl;
             break;
-        case 3: cout << "<The entered " << caseNumber << "nd parameter '" + input << "' is NOT 'distinct'.>" << endl;
-            cout << "<The entered " << caseNumber << "nd parameter '" << input << "' is NOT 'reverse'.>" << endl;
+        case 3: cout << endl << "<The entered " << caseNumber << "nd parameter '" + input << "' is NOT 'distinct'.>" << endl;
+            cout <<"<The entered " << caseNumber << "nd parameter '" << input << "' is NOT 'reverse'.>" << endl;
             cout << "<The entered " << caseNumber << "nd parameter '" << input << "' was disregarded.>" << endl;
             cout << "<The " << caseNumber <<"nd parameter should be 'distinct' or 'reverse'.>" << endl << "|" << endl;
             break;
-        case 4: cout << "<The entered " << caseNumber << "nd parameter '" << input << "' is NOT 'reverse'.>" << endl;
+        case 4: cout << endl << "<The entered " << caseNumber << "nd parameter '" << input << "' is NOT 'reverse'.>" << endl;
             cout << "<The entered " << caseNumber << "nd parameter '" << input << "' was disregarded.>" << endl;
             cout << "<The " << caseNumber <<"nd parameter should be 'reverse'.>" << endl << "|" << endl;
             break;
@@ -71,18 +71,19 @@ void inputSep(string input){
 bool wordprinter(string input){
     //we need error function when word doesn't exist.
     bool check = false;
+    cout << "|" << endl;
     for (int i = 0; i < myvec.size(); i++) {
         if (input == myvec[i].first) {
             cout << myvec[i].first << " [" << myvec[i].second.first
                   << "]  : " << myvec[i].second.second<< endl;
             check =true;
         }
-    }cout << "|";
+    }cout << "|\n" ;
     if(!check) notAvailable();
  return check;
 }
 void notAvailable(){
-    cout <<"<NOT FOUND> To be considered for the next release. Thank you.\n|";
+    cout <<"\n<NOT FOUND> To be considered for the next release. Thank you.";
 }
 bool existOrNot(string input, vector<string> listToCheck){
     for(string option: listToCheck)
@@ -93,6 +94,7 @@ bool existOrNot(string input, vector<string> listToCheck){
 void posprinter(vector<string> optionHolder)
 {       //this function needs another function to check if the pos actually is not random word.
     bool check= true;
+    cout << "|"<< endl;
     for (int i = 0; i < myvec.size(); i++) {
         if (optionHolder[0] == myvec[i].first && optionHolder[1] ==myvec[i].second.first) {
             cout<< myvec[i].first << " [" << myvec[i].second.first
@@ -105,8 +107,7 @@ void posprinter(vector<string> optionHolder)
     if(!check) return;
     if(!existOrNot(optionHolder[1], spchType2)) // if word is not in the list spchType2
         errorChecker(optionHolder[1], 2);
-    if (!wordprinter(optionHolder[0])) // if word is not not in txt file
-        notAvailable();
+    wordprinter(optionHolder[0]); // if word is not not in txt file
 
 
     cout << "|" << endl;
