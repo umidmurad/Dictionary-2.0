@@ -105,9 +105,9 @@ void posprinter(vector<string> optionHolder)
     }
     cout<< "|";
     if(!check) return;
-    if(!existOrNot(optionHolder[1], spchType2)) // if word is not in the list spchType2
+    if(!existOrNot(optionHolder[1], spchType2)) // if input is not in the list spchType2
         errorChecker(optionHolder[1], 2);
-    wordprinter(optionHolder[0]); // if word is not not in txt file
+    wordprinter(optionHolder[0]); // wordPrinter will attempt to print word, if not in txt file, it calls notAvailable()
 
 
     cout << "|" << endl;
