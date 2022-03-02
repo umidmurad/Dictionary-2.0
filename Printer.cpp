@@ -12,21 +12,7 @@ vector<string> spchType2;
 vector<string> distinct3;
 vector<string> reverse4;
 
-void filler(){
-    spchType2.push_back("verb");
-    spchType2.push_back("noun");
-    spchType2.push_back("adjective");
-    spchType2.push_back("adverb");
-    spchType2.push_back("conjunction");
-    spchType2.push_back("interjection");
-    spchType2.push_back("preposition");
-    spchType2.push_back("pronoun");
-    spchType2.push_back("reverse");
-    spchType2.push_back("distinct");
-    distinct3.push_back("distinct");
-    distinct3.push_back("reverse");
-    reverse4.push_back("reverse");
-}
+
 
 void inputSep(string input){
     vector<string> optionHolder; //declare new vector
@@ -64,6 +50,21 @@ void wordprinter(string input){
 }
 void notAvailable(){
     cout <<"\n<NOT FOUND> To be considered for the next release. Thank you.";
+}
+void filler(){
+    spchType2.push_back("verb");
+    spchType2.push_back("noun");
+    spchType2.push_back("adjective");
+    spchType2.push_back("adverb");
+    spchType2.push_back("conjunction");
+    spchType2.push_back("interjection");
+    spchType2.push_back("preposition");
+    spchType2.push_back("pronoun");
+    spchType2.push_back("reverse");
+    spchType2.push_back("distinct");
+    distinct3.push_back("distinct");
+    distinct3.push_back("reverse");
+    reverse4.push_back("reverse");
 }
 
 void errorChecker(string input, int caseNumber){
