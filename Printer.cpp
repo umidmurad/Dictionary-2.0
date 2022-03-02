@@ -110,7 +110,7 @@ void posprinter(vector<string> optionHolder)
 
     }
     cout<< "|";
-    if(!check) return; // if the word and pos was founded and printed, do not try to check for errors (line 111-113), just return back to main
+    if(!check) return; // if the word and pos was founded and printed, do not try to check for errors (line 114-116), just return back to main
     if(!existOrNot(optionHolder[1], spchType2)) // if input is not in the list spchType2
         errorChecker(optionHolder[1], 2); // 2 is for second position is invalid.
     wordprinter(optionHolder[0]); // wordPrinter will attempt to print word, if not in txt file, it calls notAvailable()
