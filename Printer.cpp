@@ -6,7 +6,7 @@ void wordprinter(string);
 void inputSep(string);
 void posprinter(vector<string>);
 void filler();
-void errorChecker();
+void errorChecker(string, int);
 void notAvailable();
 vector<string> spchType2;
 vector<string> distinct3;
