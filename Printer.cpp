@@ -106,13 +106,16 @@ vector<pair<string,pair<string,string>>> specificWordGetter(vector<string> optio
     return temp;
 }
 
-vector<pair<string,pair<string,string>>> posPrinter(vector<string> optionHolder) {
+vector<pair<string,pair<string,string>>> posPrinter(string pos) {
     for (int i = 0; i < tempVec.size(); i++) {
-        if(!(optionHolder[1] == tempVec[i].second.first))
+        if(!(pos == tempVec[i].second.first)){
             tempVec.erase(tempVec.begin() + i);
+        i--;
+        }
+
     }
     if (tempVec.empty())
-        errorChecker(optionHolder[1], 2);
+        errorChecker(pos, 2);
 return tempVec;
 }
 //___________________________________________________
@@ -188,13 +191,13 @@ void handler(vector<string> optionHolder) {
         for (int i = 2; i <= optionHolder.size(); ++i) {
             switch (i) {
                 case 1: break;
-                case 2: //book ok
+                case 2:
                     if (optionHolder[1] == "distinct")
                         tempVec = distinctHelper(optionHolder);
                     else if (optionHolder[1] == "reverse")
                         tempVec = reverseHelper();
                     else
-                        tempVec = posPrinter(optionHolder);
+                        tempVec = posPrinter(optionHolder[1]);
                     break;
                 case 3: //book noun ok
                     if (optionHolder[2] == "distinct")
