@@ -91,8 +91,8 @@ vector<string> inputSep(string input) {
 void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
     cout << "|" << endl;
     for (int i = 0; i < tempVec.size(); i++) {
-            cout << " " << myvec[i].first << " [" << myvec[i].second.first
-                 << "]  : " << myvec[i].second.second << endl;
+            cout << " " << tempVec[i].first << " [" << tempVec[i].second.first
+                 << "]  : " << tempVec[i].second.second << endl;
     }
     if (tempVec.empty()) notAvailable();
     cout << "|\n";
@@ -179,10 +179,15 @@ void guidePrinter(){
     }
 
 void handler(vector<string> optionHolder) {
-    tempVec = specificWordGetter(optionHolder, myvec);
+    tempVec = specificWordGetter(optionHolder, myVec);
+    /*cout << tempVec[0].second.second << endl;
+    cout << tempVec[1].second.second << endl;
+    cout << tempVec[2].second.second << endl;
+    cout << tempVec[3].second.second << endl;*/
     if (optionHolder.size() >= 2) {
-        for (int i = 2; i <= tempVec.size(); i++) {
+        for (int i = 2; i <= optionHolder.size(); ++i) {
             switch (i) {
+                case 1: break;
                 case 2: //book ok
                     if (optionHolder[1] == "distinct")
                         tempVec = distinctHelper(optionHolder);

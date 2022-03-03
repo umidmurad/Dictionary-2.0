@@ -7,15 +7,16 @@
 #include "sstream"
 #include <vector>
 #include <algorithm>
-#include <string>
 #include <cctype>
+#include "string"
 
 using namespace std;
 string reWriterSorter(string);
 string reWriterInput(string);
-vector< pair<string, pair<string, string> > > myvec;
+vector<pair<string,pair<string, string> > > myVec;
 
 void FileLoader() {
+    string word, pos, def, posAndDef;
     int wordcounter=0, defcounter=0;
     string line, opener ="../Data.CS.SFSU.txt";
     // string line, opener ="/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt";
@@ -32,10 +33,9 @@ void FileLoader() {
     if (FileReader.is_open()) {
         cout <<"! Loading data...\n";
         while (getline(FileReader, line)) {
-            string word, pos, def, posAndDef;
 
             char pipe = '|', arrow = ' -';
-            size_t defsAmount = count(line.begin(), line.end(), pipe); //counts the "|"
+            size_t defsAmount = count(line.begin(), line.end(), '|'); //counts the "|"
             word = line.substr(0, line.find(pipe));
             wordcounter++;
             word = reWriterSorter(word);
@@ -46,17 +46,17 @@ void FileLoader() {
             for (int i = 0; i < defsAmount; i++) {
                 getline(pipeSep, posAndDef, pipe); // pipe = "|"
 
-                pos = posAndDef.substr(0, posAndDef.find(arrow) - 1);
+                pos = posAndDef.substr(0, posAndDef.find(" -"));
                 //cout << pos << ": ";
-                def = posAndDef.erase(0, posAndDef.find(arrow) + 5);
+                def = posAndDef.erase(0, posAndDef.find(" -") + 5);
                 //cout << def << endl;
                 defcounter++;
                 def = reWriterSorter(def);
 
-                myvec.push_back(make_pair(word, make_pair(pos, def)));   // new
+                myVec.push_back(make_pair(word, make_pair(pos, def)));   // new
             }
         }
-        sort(myvec.begin(), myvec.end()); //sorts alphabetically.
+        sort(myVec.begin(), myVec.end()); //sorts alphabetically.
         cout <<"! Loading completed...\n";
     }
     FileReader.close();
@@ -67,15 +67,12 @@ void FileLoader() {
 
 
 string reWriterSorter(string str){
-    char up[str.size() + 1];
-    strcpy(up, str.c_str());
-    up[0] = toupper(up[0]);
     return str;
 }
 string reWriterInput(string str){
-    for(int i = 0; i < str.size(); i++)
-        str[i] = tolower(str[i]);
-    str[0] = toupper(str[0]);
+    //for(int i = 0; i < str.size(); i++)
+        //str[i] = tolower(str[i]);
+    //str[0] = toupper(str[0]);
     return str;
 }
 
