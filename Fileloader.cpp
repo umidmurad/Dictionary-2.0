@@ -15,7 +15,8 @@ vector< pair<string, pair<string, string> > > myvec;
 
 void FileLoader() {
     int wordcounter=0, defcounter=0;
-    string line, opener ="/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt";
+    string line, opener ="../Data.CS.SFSU.txt";
+    // string line, opener ="/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt";
     fstream FileReader;
     FileReader.open(opener, ios::in);
     cout <<"! Opening data file... " << opener <<endl;
