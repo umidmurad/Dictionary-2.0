@@ -1,18 +1,19 @@
 //
 // Created by Umid Muradli on 3/1/22.
 //
+#include "Fileloader.cpp"
 
-void wordprinter(string);
+void wordPrinter(string);
 
 vector<string> inputSep(string);
 
 void caseChooser(string input);
 
-void posprinter(vector<string>);
+vector<pair<string,pair<string,string>>> posPrinter(vector<string>);
 
-void distincthelper(vector<string>);
+vector<pair<string,pair<string,string>>>  distinctHelper(vector<string>);
 
-void reversehelper(vector<string>);
+vector<pair<string,pair<string,string>>>  reverseHelper();
 
 void filler();
 
@@ -23,8 +24,10 @@ void notAvailable();
 bool existOrNot(string, vector<string>);
 
 void handler(vector<string>);
+void guidePrinter();
+vector<pair<string,pair<string,string>>> specificWordGetter(vector<string>, vector<pair<string,pair<string,string>>>);
 
-vector<pair<string, pair<string, string> > > tempvec;
+vector<pair<string, pair<string, string> > > tempVec;
 vector<string> spchType2;
 vector<string> distinct3;
 vector<string> reverse4;
@@ -64,11 +67,11 @@ vector<string> inputSep(string input) {
 //Function that checks
 
 
-void caseChooser(string input) {
+/*void caseChooser(string input) {
     vector<string> optionHolder = inputSep(input);
     switch (optionHolder.size()) {
         case 1:
-            wordprinter(input);
+            wordPrinter(input);
             break;
         case 2:
             handler(optionHolder);
@@ -82,95 +85,58 @@ void caseChooser(string input) {
         default:
             cout << "You have inputted more than 4 options" << endl;
     }
-}
+}*/
 
 
-void wordprinter(string input) {
-    //we need error function when word doesn't exist.
-    bool check = false;
+void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
     cout << "|" << endl;
-    for (int i = 0; i < myvec.size(); i++) {
-        if (input == myvec[i].first) {
+    for (int i = 0; i < tempVec.size(); i++) {
             cout << " " << myvec[i].first << " [" << myvec[i].second.first
                  << "]  : " << myvec[i].second.second << endl;
-            check = true;
-        }
     }
-    if (!check) notAvailable(); // if word not printed (check = false), not Available is called
+    if (tempVec.empty()) notAvailable();
     cout << "|\n";
 }
 
-
-//existOrNot can be reused for reverse and distinct key option
-// in the case of: Book noun reverse, do: existOrNot(input *which holds reverse* , *whatever list you want to check if
-// input exists in, for third position do distinct3*)
-
-
-void posprinter(
-        vector<string> optionHolder) {       //this function needs another function to check if the pos actually is not random word.
-    bool check = true;
-    cout << "|\n";
-
-    for (int i = 0; i < myvec.size(); i++) {
-        if (optionHolder[0] == myvec[i].first && optionHolder[1] == myvec[i].second.first) {
-            cout << " " << myvec[i].first << " [" << myvec[i].second.first
-                 << "]  : " << myvec[i].second.second << endl;
-            check = false;
-        }
-
-    }
-    // if the word and pos was founded and printed, do not try to check for errors (line 114-116), just return back to main
-
-    if (!check) {
-        cout << "|";
-        return;
-    }// if the word and pos was founded and printed, do not try to check for errors (line 114-116), just return back to main
-    if (!existOrNot(optionHolder[1], spchType2)) // if input is not in the list spchType2
-        errorChecker(optionHolder[1], 2); // 2 is for second position is invalid.
-    wordprinter(optionHolder[0]); // wordPrinter will attempt to print word, if not in txt file, it calls notAvailable()
+vector<pair<string,pair<string,string>>> specificWordGetter(vector<string> optionHolder, vector<pair<string,pair<string,string>>> vec){
+    vector<pair<string,pair<string,string>>> temp;
+    for(pair<string,pair<string,string>> value: vec)
+        if(value.first == optionHolder[0]) //
+            temp.push_back(value);
+    return temp;
 }
 
-
+vector<pair<string,pair<string,string>>> posPrinter(vector<string> optionHolder) {
+    for (int i = 0; i < tempVec.size(); i++) {
+        if(!(optionHolder[1] == tempVec[i].second.first))
+            tempVec.erase(tempVec.begin() + i);
+    }
+    if (tempVec.empty())
+        errorChecker(optionHolder[1], 2);
+return tempVec;
+}
 //___________________________________________________
 //DISTINCT
-void distincthelper(vector<string> optionHolder) {
-    vector<pair<string, pair<string, string> > > tempvec = myvec;
+vector<pair<string,pair<string,string>>>  distinctHelper(vector<string> optionHolder) {
     int j = 0;
-    if (tempvec.size() > 1) {
-        for (int i = 1; i < tempvec.size(); i++) {
-            if ((tempvec[j].first == tempvec[i].first) && (tempvec[j].second.first == tempvec[i].second.first) &&
-                (tempvec[j].second.second == tempvec[i].second.second)) {
-                tempvec.erase(tempvec.begin() + j);
+    if (tempVec.size() > 1) {
+        for (int i = 1; i < tempVec.size(); i++) {
+            if ((tempVec[j].first == tempVec[i].first) && (tempVec[j].second.first == tempVec[i].second.first) &&
+                (tempVec[j].second.second == tempVec[i].second.second)) {
+                tempVec.erase(tempVec.begin() + j);
                 i--;
                 continue;
             }
             j++;
         }
     }
-
-    for (int i = 0; i < tempvec.size(); i++) {
-        if (optionHolder[0] == tempvec[i].first) {
-            cout << " " << tempvec[i].first << " [" << tempvec[i].second.first
-                 << "]  : " << tempvec[i].second.second << endl;
-
-        }
-    }
+return tempVec;
 }
-
 //REVERSE
-void reversehelper(vector<string> optionHolder) {
-    vector<pair<string, pair<string, string> > > tempvec = myvec;
-    reverse(tempvec.begin(), tempvec.end());
-    for (int i = 0; i < tempvec.size(); i++) {
-        if (optionHolder[0] == tempvec[i].first) {
-            cout << " " << tempvec[i].first << " [" << tempvec[i].second.first
-                 << "]  : " << tempvec[i].second.second << endl;
-
-        }
-    }
+vector<pair<string,pair<string,string>>>  reverseHelper() {
+    reverse(tempVec.begin(), tempVec.end());
+return tempVec;
 }
-
-
 //___________________________________________________
 void errorChecker(string input, int caseNumber) {
     switch (caseNumber) {
@@ -207,26 +173,40 @@ bool existOrNot(string input, vector<string> listToCheck) {
 void notAvailable() {
     cout << " <NOT FOUND> To be considered for the next release. Thank you." << endl;
 }
+void guidePrinter(){
+        string guide = "\t|\n \t PARAMETER HOW-TO, please enter:\n\t 1. A search key -then 2. An optional part of speech -then\n\t 3. An optional 'distinct' -then 4. An optional 'reverse'\n \t|";
+        cout << guide;
+    }
 
 void handler(vector<string> optionHolder) {
-    switch (optionHolder.size()) {
-            case 2:
-                if (optionHolder[1] == "distinct")
-                    distincthelper(optionHolder);
-                else if (optionHolder[1] == "reverse")
-                    reversehelper(optionHolder);
-                else
-                    posprinter(optionHolder);
-                break;
-            case 3:
-                if (optionHolder[2] == "distinct")
-                    distincthelper(optionHolder);
-                else if (optionHolder[2] == "reverse")
-                    reversehelper(optionHolder);
-                break;
-            case 4: if(optionHolder[3] == "reverse")
-                    reversehelper(optionHolder);
-                break;
-
+    tempVec = specificWordGetter(optionHolder, myvec);
+    if (optionHolder.size() >= 2) {
+        for (int i = 2; i <= tempVec.size(); i++) {
+            switch (i) {
+                case 2: //book ok
+                    if (optionHolder[1] == "distinct")
+                        tempVec = distinctHelper(optionHolder);
+                    else if (optionHolder[1] == "reverse")
+                        tempVec = reverseHelper();
+                    else
+                        tempVec = posPrinter(optionHolder);
+                    break;
+                case 3: //book noun ok
+                    if (optionHolder[2] == "distinct")
+                        tempVec = distinctHelper(optionHolder);
+                    else if (optionHolder[2] == "reverse")
+                        tempVec = reverseHelper();
+                    else errorChecker(optionHolder[2], 3);
+                    break;
+                case 4:
+                    if (optionHolder[3] == "reverse")
+                        tempVec = reverseHelper();
+                    else errorChecker(optionHolder[3], 4);
+                    break;
+                default: guidePrinter();
+            }
+        }
     }
+    wordPrinter(tempVec);
+    tempVec.clear();
 }

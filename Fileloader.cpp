@@ -7,6 +7,8 @@
 #include "sstream"
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <cctype>
 
 using namespace std;
 string reWriterSorter(string);
@@ -65,7 +67,9 @@ void FileLoader() {
 
 
 string reWriterSorter(string str){
-    str[0] = toupper(str[0]);
+    char up[str.size() + 1];
+    strcpy(up, str.c_str());
+    up[0] = toupper(up[0]);
     return str;
 }
 string reWriterInput(string str){
