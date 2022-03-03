@@ -19,8 +19,8 @@ int main() {
         getline(cin, input);
         //cout << "|"<< endl;
         input = reWriterInput(input);
-        //caseChooser(input);
-        inputSep(input);
+        caseChooser(input);
+        //inputSep(input);
     }
     return 0;
 }

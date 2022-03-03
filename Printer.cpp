@@ -3,7 +3,8 @@
 //
 
 void wordprinter(string);
-void inputSep(string);
+vector<string> inputSep(string);
+void caseChooser(string input);
 void posprinter(vector<string>);
 void distincthelper(vector<string>);
 void reversehelper(vector <string>);
@@ -33,26 +34,36 @@ void filler(){
     reverse4.push_back("reverse");
 }
 
-void inputSep(string input){
-    vector<string> optionHolder; //declare new vector
-    string temp = input, option; //temp holds the input
+
+vector<string> inputSep(string input){
     input.append(" "); // If I do not add a space, it will not read the last thing inputted
+    vector<string> optionHolder;
     stringstream line(input);
-    int numberOfSpaces = count(input.begin(), input.end(), ' ');
-    for(int i = 0; i < numberOfSpaces; i++) {
+    string option;
+    size_t numberOfSpaces = count(input.begin(), input.end(), ' ');
+    for(size_t i = 0; i < numberOfSpaces; i++) {
         getline(line, option, ' ');
-        if (option == "") // If Extra Space is inputted skip to next word
+        if(option == "") // If Extra Space is inputted skip to next word
             continue;
         optionHolder.push_back(option);
     }
-    switch (numberOfSpaces) {
-        case 1: wordprinter(temp); break;
-        case 2: reversehelper(optionHolder); break; //posprinter(optionHolder); distincthelper(optionHolder);
+
+    return optionHolder;
+}
+//Function that checks
+
+
+void caseChooser(string input){
+    vector<string> optionHolder =inputSep(input);
+    switch (optionHolder.size()) {
+        case 1:  wordprinter(input); break;
+        case 2:  posprinter(optionHolder); break;
         case 3: cout << "distinct, reverse" << endl; break;
         case 4: cout << "reverse" << endl; break;
         default: cout << "You have inputted more than 4 options" << endl;
     }
 }
+
 
 void wordprinter(string input){
     //we need error function when word doesn't exist.
@@ -168,3 +179,19 @@ bool existOrNot(string input, vector<string> listToCheck){
 void notAvailable(){
     cout <<" <NOT FOUND> To be considered for the next release. Thank you." <<endl;
 }
+
+
+//vector<string> inputSep(string input){
+//    vector<string> optionHolder; //declare new vector
+//    string temp = input, option; //temp holds the input
+//    input.append(" "); // If I do not add a space, it will not read the last thing inputted
+//    stringstream line(input);
+//    int numberOfSpaces = count(input.begin(), input.end(), ' ');
+//    for(int i = 0; i < numberOfSpaces; i++) {
+//        getline(line, option, ' ');
+//        if (option == "") // If Extra Space is inputted skip to next word
+//            continue;
+//        optionHolder.push_back(option);
+//    }
+//    return optionHolder;
+//}
