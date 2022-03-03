@@ -13,7 +13,7 @@ vector<pair<string,pair<string,string>>> posPrinter(vector<string>);
 
 vector<pair<string,pair<string,string>>>  distinctHelper(vector<string>);
 
-vector<pair<string,pair<string,string>>>  reverseHelper();
+vector<pair<string,pair<string,string>>>  reverseHelper(vector<string> optionHolder);
 
 void filler();
 
@@ -123,6 +123,8 @@ return tempVec;
 //___________________________________________________
 //DISTINCT
 vector<pair<string,pair<string,string>>>  distinctHelper(vector<string> optionHolder) {
+    if(tempVec.size() == 0)
+        tempVec = specificWordGetter(optionHolder, myVec);
     int j = 0;
     if (tempVec.size() > 1) {
         for (int i = 1; i < tempVec.size(); i++) {
@@ -138,7 +140,9 @@ vector<pair<string,pair<string,string>>>  distinctHelper(vector<string> optionHo
 return tempVec;
 }
 //REVERSE
-vector<pair<string,pair<string,string>>>  reverseHelper() {
+vector<pair<string,pair<string,string>>>  reverseHelper(vector<string> optionHolder) {
+    if(tempVec.size() == 0)
+        tempVec = specificWordGetter(optionHolder, myVec);
     reverse(tempVec.begin(), tempVec.end());
 return tempVec;
 }
@@ -197,7 +201,7 @@ void handler(vector<string> optionHolder) {
                     if (optionHolder[1] == "distinct")
                         tempVec = distinctHelper(optionHolder);
                     else if (optionHolder[1] == "reverse")
-                        tempVec = reverseHelper();
+                        tempVec = reverseHelper(optionHolder);
                     else
                         tempVec = posPrinter(optionHolder[1]);
                     break;
@@ -205,12 +209,12 @@ void handler(vector<string> optionHolder) {
                     if (optionHolder[2] == "distinct")
                         tempVec = distinctHelper(optionHolder);
                     else if (optionHolder[2] == "reverse")
-                        tempVec = reverseHelper();
+                        tempVec = reverseHelper(optionHolder);
                     else errorChecker(optionHolder[2], 3);
                     break;
                 case 4:
                     if (optionHolder[3] == "reverse")
-                        tempVec = reverseHelper();
+                        tempVec = reverseHelper(optionHolder);
                     else errorChecker(optionHolder[3], 4);
                     break;
                 default: guidePrinter();
