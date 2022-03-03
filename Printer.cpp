@@ -114,7 +114,9 @@ vector<pair<string,pair<string,string>>> posPrinter(string pos) {
         }
 
     }
-    if (tempVec.empty())
+    if(tempVec.empty() and existOrNot(pos, spchType2))
+        notAvailable();
+    else if (tempVec.empty())
         errorChecker(pos, 2);
 return tempVec;
 }
@@ -215,6 +217,8 @@ void handler(vector<string> optionHolder) {
             }
         }
     }
+    if(tempVec.size() == 0)
+        tempVec = specificWordGetter(optionHolder, myVec);
     wordPrinter(tempVec);
     tempVec.clear();
 }
