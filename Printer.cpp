@@ -64,29 +64,6 @@ vector<string> inputSep(string input) {
 
     return optionHolder;
 }
-//Function that checks
-
-
-/*void caseChooser(string input) {
-    vector<string> optionHolder = inputSep(input);
-    switch (optionHolder.size()) {
-        case 1:
-            wordPrinter(input);
-            break;
-        case 2:
-            handler(optionHolder);
-            break;
-        case 3:
-            handler(optionHolder);
-            break;
-        case 4:
-            handler(optionHolder);
-            break;
-        default:
-            cout << "You have inputted more than 4 options" << endl;
-    }
-}*/
-
 
 void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
     cout << "|" << endl;
@@ -94,7 +71,6 @@ void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
             cout << " " << tempVec[i].first << " [" << tempVec[i].second.first
                  << "]  : " << tempVec[i].second.second << endl;
     }
-    if (tempVec.empty()) notAvailable();
     cout << "|\n";
 }
 
@@ -103,6 +79,10 @@ vector<pair<string,pair<string,string>>> specificWordGetter(vector<string> optio
     for(pair<string,pair<string,string>> value: vec)
         if(value.first == optionHolder[0]) //
             temp.push_back(value);
+    if(temp.empty()) {
+        notAvailable();
+        guidePrinter();
+    }
     return temp;
 }
 
@@ -112,12 +92,12 @@ vector<pair<string,pair<string,string>>> posPrinter(string pos) {
             tempVec.erase(tempVec.begin() + i);
         i--;
         }
-
     }
-    if(tempVec.empty() and existOrNot(pos, spchType2))
-        notAvailable();
-    else if (tempVec.empty())
+
+    if (tempVec.empty() and !existOrNot(pos, spchType2)) // book ok
         errorChecker(pos, 2);
+    else if(tempVec.empty() and existOrNot(pos, spchType2))
+            notAvailable();
 return tempVec;
 }
 //___________________________________________________
@@ -189,6 +169,7 @@ void guidePrinter(){
 
 void handler(vector<string> optionHolder) {
     tempVec = specificWordGetter(optionHolder, myVec);
+    if(tempVec.empty()) return;
     /*cout << tempVec[0].second.second << endl;
     cout << tempVec[1].second.second << endl;
     cout << tempVec[2].second.second << endl;
@@ -221,7 +202,7 @@ void handler(vector<string> optionHolder) {
             }
         }
     }
-    if(tempVec.size() == 0)
+    if(tempVec.empty())
         tempVec = specificWordGetter(optionHolder, myVec);
     wordPrinter(tempVec);
     tempVec.clear();
