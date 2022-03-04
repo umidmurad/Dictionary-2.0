@@ -3,13 +3,13 @@
 //
 #include "Fileloader.cpp"
 
-void wordPrinter(string);
+void wordPrinter(vector<pair<string, pair<string, string>>> );
 
 vector<string> inputSep(string);
 
-void caseChooser(string input);
-
-vector<pair<string,pair<string,string>>> posPrinter(vector<string>);
+//void caseChooser(string input);
+vector<pair<string,pair<string,string>>> posPrinter(string );
+//vector<pair<string,pair<string,string>>> posPrinter(vector<string>);
 
 vector<pair<string,pair<string,string>>>  distinctHelper(vector<string>);
 

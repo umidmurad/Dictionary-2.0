@@ -2,6 +2,7 @@
 //
 #include <iostream>
 #include <string>
+#include <cctype>
 #include "algorithm"
 #include "Printer.cpp"
 using namespace std;
@@ -16,7 +17,6 @@ int main() {
         cout << "\nSearch [" <<keepcount <<"] : ";
         keepcount++;
         getline(cin, input);
-        //cout << "|"<< endl;
         input = reWriterInput(input);
         handler(inputSep(input));
     }

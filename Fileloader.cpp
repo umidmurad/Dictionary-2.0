@@ -8,7 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
-#include "string"
+#include <string>
 
 using namespace std;
 string reWriterSorter(string);
@@ -34,7 +34,7 @@ void FileLoader() {
         cout <<"! Loading data...\n";
         while (getline(FileReader, line)) {
 
-            char pipe = '|', arrow = ' -';
+            char pipe = '|';
             size_t defsAmount = count(line.begin(), line.end(), '|'); //counts the "|"
             word = line.substr(0, line.find(pipe));
             wordcounter++;
@@ -48,7 +48,7 @@ void FileLoader() {
 
                 pos = posAndDef.substr(0, posAndDef.find(" -"));
                 //cout << pos << ": ";
-                def = posAndDef.erase(0, posAndDef.find(" -") + 5);
+                def = posAndDef.erase(0, posAndDef.find(" -") + 6);
                 //cout << def << endl;
                 defcounter++;
                 def = reWriterSorter(def);
@@ -67,12 +67,13 @@ void FileLoader() {
 
 
 string reWriterSorter(string str){
+    str[0] = toupper(str[0]);
     return str;
 }
 string reWriterInput(string str){
-    //for(int i = 0; i < str.size(); i++)
-        //str[i] = tolower(str[i]);
-    //str[0] = toupper(str[0]);
+    for(int i = 0; i < str.size(); i++)
+        str[i] = tolower(str[i]);
+    str[0] = toupper(str[0]);
     return str;
 }
 

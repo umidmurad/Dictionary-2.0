@@ -1,4 +1,4 @@
-arrow|noun -=>> Here is one arrow: <IMG> -=>> </IMG>..   
+arrow|noun -=>> Here is one arrow: <IMG> -=>> </IMG>..
 book|noun -=>> A set of pages.|verb -=>> To arrange something on a particular date.|verb -=>> to arrange for someone to have a seat on a plane.|noun -=>> A written work published in printed or electronic form. 
 bookable|adjective -=>> Can be ordered in advanced. 
 bookbinder|noun -=>> A person who fastens the pages of books.   
