@@ -67,7 +67,41 @@ void FileLoader() {
 
 
 string reWriterSorter(string str){
+    string copy = str;
+    //int myStringToInt = stoi(copy);
+
+    for(int i=0; i < str.size(); i++)
+        if (isdigit(str[i])) {
+            for (int j = 0; j <str.size() ; j++) {
+                str[j] = toupper(str[j]);
+
+            }
+        }
     str[0] = toupper(str[0]);
+    return str;
+}
+string reWriterInput(string str){ // Csc210
+
+    for(int i = 0; i < str.size(); i++)
+        str[i] = tolower(str[i]);
+    str[0] = toupper(str[0]);
+
+    for(int i=0; i < str.size(); i++)
+        if (isdigit(str[i])) {
+            for (int j = 0; j <str.size() ; j++) {
+                str[j] = toupper(str[j]);
+
+            }
+        }
+    return str;
+}
+
+/*
+
+string reWriterSorter(string str){
+
+    str[0] = toupper(str[0]);
+
     return str;
 }
 string reWriterInput(string str){
@@ -77,3 +111,4 @@ string reWriterInput(string str){
     return str;
 }
 
+*/
