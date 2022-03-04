@@ -50,7 +50,7 @@ vector<string> inputSep(string input) {
 void handler(vector<string> optionHolder) {
     tempVec = specificWordGetter(optionHolder, myVec);
     if(tempVec.empty()) return;
-    if (optionHolder.size() >= 2) {
+    if (optionHolder.size() >= 1 && optionHolder.size()<5) {
         for (int i = 2; i <= optionHolder.size(); ++i) {
             switch (i) {
                 case 1: break;
@@ -74,10 +74,10 @@ void handler(vector<string> optionHolder) {
                         tempVec = reverseHelper(optionHolder);
                     else errorChecker(optionHolder[3], 4);
                     break;
-                default: guidePrinter(); return;
             }
         }
     }
+    else {guidePrinter(); return;}
 
     if(tempVec.empty() && (existOrNot(optionHolder[1], spchType2)) )
     {guidePrinter(); return;}

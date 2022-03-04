@@ -12,11 +12,13 @@ int main() {
     filler();
     //new after this
     string input;
-    int keepcount =1;
-    while(input != "!q") {
-        cout << "\nSearch [" <<keepcount <<"] : ";
-        keepcount++;
+    int keepCount =1;
+    while(true) {
+        cout << "\nSearch [" <<keepCount <<"] : ";
+        keepCount++;
         getline(cin, input);
+        if(input ==" " || input =="" || input =="!help") {guidePrinter();continue;}
+        else if(input=="!q" || input == "!Q") {cout <<"\n-----THANK YOU-----\n"; return 0;}
         input = reWriterInput(input);
         handler(inputSep(input));
     }
