@@ -11,68 +11,65 @@
 #include <string>
 
 using namespace std;
-string reWriterSorter(string);
-string reWriterInput(string);
-vector<pair<string,pair<string, string> > > myVec;
 
+string reWriterSorter(string);
+
+string reWriterInput(string);
+
+vector<pair<string, pair<string, string> > > myVec;
+
+// FileLoader will read text file and separate it by "|"
 void FileLoader() {
     string word, pos, def, posAndDef;
-    int wordcounter=0, defcounter=0;
-    string line, opener ="../Data.CS.SFSU.txt";
-    // string line, opener ="/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt";
+    int wordcounter = 0, defcounter = 0;
+    string line, opener = "/Users/umidmuradli/Documents/GitHub/Dictionary-2.0/Data.CS.SFSU.txt";
     fstream FileReader;
     FileReader.open(opener, ios::in);
-    cout <<"! Opening data file... " << opener <<endl;
+    cout << "! Opening data file... " << opener << endl;
     while (!FileReader.is_open()) {
-        cout <<"<!>ERROR<!> ===> File could not be opened.\n<!>ERROR<!> ===> Provided file path: " << opener <<endl;
-        cout <<"<!>Enter the CORRECT data file path: ";
+        cout << "<!>ERROR<!> ===> File could not be opened.\n<!>ERROR<!> ===> Provided file path: " << opener << endl;
+        cout << "<!>Enter the CORRECT data file path: ";
         getline(cin, opener);
         FileReader.open(opener, ios::in); //tries until file is open.
     }
     //once file is open it starts to load the data.
     if (FileReader.is_open()) {
-        cout <<"! Loading data...\n";
+        cout << "! Loading data...\n";
         while (getline(FileReader, line)) {
 
             char pipe = '|';
-            size_t defsAmount = count(line.begin(), line.end(), '|'); //counts the "|"
+            size_t defsAmount = count(line.begin(), line.end(), '|');//counts the "|" in each line
             word = line.substr(0, line.find(pipe));
             wordcounter++;
             word = reWriterSorter(word);
-            //cout << "\n" << word << "-----------------------------" << endl;
             line.erase(0, line.find(pipe) + 1);
             stringstream pipeSep(line);
 
             for (int i = 0; i < defsAmount; i++) {
                 getline(pipeSep, posAndDef, pipe); // pipe = "|"
-
                 pos = posAndDef.substr(0, posAndDef.find(" -"));
-                //cout << pos << ": ";
                 def = posAndDef.erase(0, posAndDef.find(" -") + 6);
-                //cout << def << endl;
                 defcounter++;
                 def = reWriterSorter(def);
 
-                myVec.push_back(make_pair(word, make_pair(pos, def)));   // new
+                myVec.push_back(make_pair(word, make_pair(pos, def)));
             }
         }
         sort(myVec.begin(), myVec.end()); //sorts alphabetically.
-        cout <<"! Loading completed...\n";
+        cout << "! Loading completed...\n";
     }
     FileReader.close();
-    cout <<endl << "====== DICTIONARY 340 C++ =====" <<endl;
-    cout << "------ Keywords: " <<wordcounter <<endl;
-    cout << "------ Definitions: " << defcounter <<endl;
+    cout << endl << "====== DICTIONARY 340 C++ =====" << endl;
+    cout << "------ Keywords: " << wordcounter << endl;
+    cout << "------ Definitions: " << defcounter << endl;
 }
 
-
-string reWriterSorter(string str){
-    string copy = str;
-    //int myStringToInt = stoi(copy);
-
-    for(int i=0; i < str.size(); i++)
+// reWriterSorter It will capitalize first letter of word
+string reWriterSorter(string str) {
+    // if word has number in it, capitalize it
+    for (int i = 0; i < str.size(); i++)
         if (isdigit(str[i])) {
-            for (int j = 0; j <str.size() ; j++) {
+            for (int j = 0; j < str.size(); j++) {
                 str[j] = toupper(str[j]);
 
             }
@@ -80,15 +77,16 @@ string reWriterSorter(string str){
     str[0] = toupper(str[0]);
     return str;
 }
-string reWriterInput(string str){ // Csc210
 
-    for(int i = 0; i < str.size(); i++)
+// reWriterInput will make sure input is reformatted properly for search
+string reWriterInput(string str) {
+    for (int i = 0; i < str.size(); i++)
         str[i] = tolower(str[i]);
     str[0] = toupper(str[0]);
 
-    for(int i=0; i < str.size(); i++)
+    for (int i = 0; i < str.size(); i++)
         if (isdigit(str[i])) {
-            for (int j = 0; j <str.size() ; j++) {
+            for (int j = 0; j < str.size(); j++) {
                 str[j] = toupper(str[j]);
 
             }

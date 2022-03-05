@@ -1,16 +1,11 @@
-// Created by Umid Muradli on 2/23/22.
-//
 #include <iostream>
 #include <string>
-#include <cctype>
-#include "algorithm"
 #include "Printer.cpp"
 using namespace std;
 
 int main() {
     FileLoader(); //loads the data
-    filler();
-    //new after this
+    filler(); // loads available options (reverse, distinct, all pos)
     string input;
     int keepCount =1;
     while(true) {
@@ -19,8 +14,7 @@ int main() {
         getline(cin, input);
         if(input ==" " || input =="" || input =="!help") {guidePrinter();continue;}
         else if(input=="!q" || input == "!Q") {cout <<"\n-----THANK YOU-----\n"; return 0;}
-        input = reWriterInput(input);
+        input = reWriterInput(input);//we make sure users input matches word in vector before passing it to handler
         handler(inputSep(input));
     }
-    return 0;
 }
