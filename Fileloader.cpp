@@ -86,27 +86,17 @@ string reWriterInput(string str) {
 
     for (int i = 0; i < str.size(); i++)
         if (isdigit(str[i])) {
-            for (int j = 0; j < str.size(); j++) {
-                str[j] = toupper(str[j]);
-
+            //int untilspace =0;
+            int untilspace = str.find(" ");
+            if (untilspace == -1) { //if it doesnt find sapce, it uppers whole size
+                for (int j = 0; j < str.size(); j++) {
+                    str[j] = toupper(str[j]);
+                }
+            } else { //if it finds space, it uppers only the word
+                for (int j = 0; j < untilspace; j++) {
+                    str[j] = toupper(str[j]);
+                }
             }
         }
     return str;
 }
-
-/*
-
-string reWriterSorter(string str){
-
-    str[0] = toupper(str[0]);
-
-    return str;
-}
-string reWriterInput(string str){
-    for(int i = 0; i < str.size(); i++)
-        str[i] = tolower(str[i]);
-    str[0] = toupper(str[0]);
-    return str;
-}
-
-*/
