@@ -5,13 +5,13 @@ void errorChecker(string, int);
 void notAvailable();
 bool existOrNot(string, vector<string>);
 void guidePrinter();
-void wordPrinter(vector<pair<string, pair<string, string>>>);
+void wordPrinter(vector<pair<string, pair<string, string> > >);
 vector<string> inputSep(string);
-vector<pair<string, pair<string, string>>> lookUp(string);
-vector<pair<string, pair<string, string>>> distinctHelper(vector<string>);
-vector<pair<string, pair<string, string>>> reverseHelper(vector<string> optionHolder);
-vector<pair<string, pair<string, string>>>
-specificWordGetter(vector<string>, vector<pair<string, pair<string, string>>>);
+vector<pair<string, pair<string, string> > > lookUp(string);
+vector<pair<string, pair<string, string> > > distinctHelper(vector<string>);
+vector<pair<string, pair<string, string> > > reverseHelper(vector<string> optionHolder);
+vector<pair<string, pair<string, string> > >
+specificWordGetter(vector<string>, vector<pair<string, pair<string, string> > >);
 vector<pair<string, pair<string, string> > > tempVec;
 vector<string> possibleOptions;
 
@@ -77,10 +77,10 @@ void handler(vector<string> optionHolder) {
 }
 
 // specificWordGetter copies only word user inputted into a separate, smaller in size vector
-vector<pair<string, pair<string, string>>>
-specificWordGetter(vector<string> optionHolder, vector<pair<string, pair<string, string>>> vec) {
-    vector<pair<string, pair<string, string>>> temp;
-    for (pair<string, pair<string, string>> value: vec)
+vector<pair<string, pair<string, string> > >
+specificWordGetter(vector<string> optionHolder, vector<pair<string, pair<string, string> > > vec) {
+    vector<pair<string, pair<string, string> > > temp;
+    for (pair<string, pair<string, string> > value: vec)
         if (value.first == optionHolder[0]) //
             temp.push_back(value);
     if (temp.empty()) {
@@ -91,7 +91,7 @@ specificWordGetter(vector<string> optionHolder, vector<pair<string, pair<string,
 }
 
 // wordPrinter prints vector
-void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
+void wordPrinter(vector<pair<string, pair<string, string> > > tempVec) {
     cout << "\t|" << endl;
     for (int i = 0; i < tempVec.size(); i++) {
         cout << "\t " << tempVec[i].first << " [" << tempVec[i].second.first
@@ -101,7 +101,7 @@ void wordPrinter(vector<pair<string, pair<string, string>>> tempVec) {
 }
 
 // looUp will delete everything that is not the same as users part of speech input
-vector<pair<string, pair<string, string>>> lookUp(string pos) {
+vector<pair<string, pair<string, string> > > lookUp(string pos) {
     for (int i = 0; i < tempVec.size(); i++) {
         if (!(pos == tempVec[i].second.first)) {
             tempVec.erase(tempVec.begin() + i);
@@ -117,7 +117,7 @@ vector<pair<string, pair<string, string>>> lookUp(string pos) {
 }
 
 // distinctHelper will delete contents of vector if defs are the same within same pos
-vector<pair<string, pair<string, string>>> distinctHelper(vector<string> optionHolder) {
+vector<pair<string, pair<string, string> > > distinctHelper(vector<string> optionHolder) {
     if (tempVec.size() == 0)
         tempVec = specificWordGetter(optionHolder, myVec);
     int j = 0;
@@ -136,7 +136,7 @@ vector<pair<string, pair<string, string>>> distinctHelper(vector<string> optionH
 }
 
 //reverseHelper reverses vector alphabetically
-vector<pair<string, pair<string, string>>> reverseHelper(vector<string> optionHolder) {
+vector<pair<string, pair<string, string> > > reverseHelper(vector<string> optionHolder) {
     if (tempVec.size() == 0)
         tempVec = specificWordGetter(optionHolder, myVec);
     reverse(tempVec.begin(), tempVec.end());
